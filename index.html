@@ -1,0 +1,473 @@
+<!-- 
+
+      ************************************************************
+
+           ++++++++++++++    --------    +++++++++++++++++
+
+{   By ~Aryan Maurya Mr.perfect https://amsrportfolio.netlify.app  }
+
+           ++++++++++++++    --------    +++++++++++++++++
+
+      ************************************************************
+ -->
+
+
+<!DOCTYPE html>
+<html> 
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">  
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=7" />
+  <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
+  <meta name="author" content="Aryan Maurya" />
+  <link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
+  <link rel="apple-touch-icon" href="favicon.png" />
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
+  />
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <meta
+    name="description"
+    content="This is online image assembly game build for your imporove thing skill in this domain by aryan maurya enjoy your game"
+  />
+  <meta name="keywords" content="Image Assembly Game, puzzle game, jigsaw puzzle, brain teaser, picture puzzle, interactive game, challenge, entertainment, problem-solving, gaming, creativity, visual skills, virtual puzzle, fun game, assembly, gaming experience, leisure activity">
+
+  <title>Image Assembly Game</title>
+   <link href="https://fonts.googleapis.com/css2?family=Courgette&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <style>
+ body {
+    font-family: 'Courgette', cursive;
+    background: linear-gradient(120deg, #B2DFFC, #FFDAC1, #AECDEE, #FFCBA4, #9ABED2, #FFB987, #89AFC6, #FFA669);
+    background-size: 400% 400%;
+    color: white;
+    animation: Gradient 10s infinite linear;
+}
+
+@keyframes Gradient {
+    0% {
+        background-position: 100% 0%;
+    }
+    25% {
+        background-position: 0% 100%;
+    }
+    50% {
+        background-position: 100% 100%;
+    }
+    75% {
+        background-position: 0% 0%;
+    }
+    100% {
+        background-position: 100% 0%;
+    }
+}
+
+h1 {
+    text-align: center;
+    margin: 40px 0 20px;
+    font-size: 4rem;
+    color: white;
+    text-shadow: 0px 4px 3px rgba(0, 0, 0, 0.4), 0px 8px 13px rgba(0, 0, 0, 0.1), 0px 18px 23px rgba(0, 0, 0, 0.1);
+    letter-spacing: 4px;
+    padding: 20px;
+    border-radius: 10px;
+}
+
+.puzzle {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(3, 1fr);
+    width: 372px;
+    height: 372px;
+    margin: 0 auto;
+    border: 2px solid black;
+    overflow: hidden;
+}
+
+.puzzle-piece {
+    width: 100%;
+    height: 100%;
+    background-size: 300% 300%;
+    background-repeat: no-repeat;
+    border: 1px solid black;
+    transition: transform 0.3s ease-in-out;
+    cursor: pointer;
+}
+
+.puzzle-piece.correct {
+    border-color: green;
+}
+
+label {
+    font-size: 1.2rem;
+    text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.1);
+    margin-right: 10px;
+    color: black;
+    text-align: center;
+}
+
+select, input[type="file"] {
+    display: block;
+    margin: 15px auto;
+    padding: 10px 15px;
+    font-size: 1rem;
+    border: none;
+    border-radius: 5px;
+    box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.2);
+    cursor: pointer;
+    background-color: #64C4ED;
+    color: black;
+}
+
+input[type="file"] {
+    margin: 20px auto;
+    width: 50%;
+}
+
+#view-image-btn {
+    display: block;
+    margin: 20px auto;
+    padding: 10px 20px;
+    background-color: #64C4ED;
+    border: none;
+    border-radius: 5px;
+    box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.2);
+    color: black;
+    cursor: pointer;
+}
+
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+.modal-content {
+    margin: 15% auto;
+    display: block;
+    width: 80%;
+    max-width: 700px;
+}
+
+.close-modal {
+    position: absolute;
+    top: 10px;
+    right: 25px;
+    color: #f1f1f1;
+    font-size: 35px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.close-modal:hover, .close-modal:focus {
+    color: #bbb;
+    text-decoration: none;
+}
+
+.alert-text {
+    font-size: 14px;
+    text-align: left;
+}
+
+.changelog-btn {
+    bottom: 10px;
+    left: 10px;
+    padding: 10px 15px;
+    background-color: #64C4ED;
+    border: none;
+    border-radius: 5px;
+    box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.2);
+    color: black;
+    cursor: pointer;
+    transition: 0.3s ease;
+}
+
+.changelog-btn:hover {
+    background-color: #52A8D4;
+}
+
+.swal2-popup {
+    font-family: 'Courgette', cursive;
+    text-align: left;
+}
+  </style>
+</head>
+<body>
+    <div>
+        <h1>Image Assembly Game</h1>
+        <label for="difficulty" style="display: block; text-align: center;">Difficulty:</label>
+        <select id="difficulty">
+            <option value="easy">Easy</option>
+            <option value="medium" selected>Medium</option>
+            <option value="hard">Hard</option>
+        </select>
+    </div>
+    <label for="pictionary" style="display: block; text-align: center;">Select an Image:</label>
+    <select id="pictionary">
+        <option value="default" selected>Developer Logo</option>
+        <option value="https://3.bp.blogspot.com/-4ZARjpgf9Q0/WUJTOE0jlFI/AAAAAAAADmA/1XrQlfT1vowfPjhyicNAPNLkaQpVbWv2wCLcBGAs/s1600/python-logo.png">Python Logo</option>
+        <option value="https://www.hdwallpapers.in/download/landscape_photography_of_forest_with_path_4k_hd_nature-HD.jpg">Forest Scene</option>
+<option value="https://clipartcraft.com/images/transparent-background-google-logo-6.png">Google Logo</option>
+<option value="https://www.analystratings.com/stockpics/MSFT/microsoft-logo.jpg">Microsoft Logo</option>
+
+    </select>
+    <input type="file" id="image-upload" accept="image/*">
+    <div class="puzzle" id="puzzle"></div>
+    
+    <button id="view-image-btn">View Image</button>
+
+<div id="image-modal" class="modal">
+    <span class="close-modal">&times;</span>
+    <img class="modal-content" id="modal-image">
+</div>
+<button id="changelog-btn" class="changelog-btn">Change Log</button>
+
+</body>
+  <script>
+    const puzzleDiv = document.getElementById('puzzle');
+    const imageUpload = document.getElementById('image-upload');
+
+const pictionarySelect = document.getElementById('pictionary');
+pictionarySelect.addEventListener('change', handlePictionarySelection);
+
+
+    let puzzlePieces = [];
+    let emptyPieceIndex;
+    let selectedPieceIndex = null;
+    let gridSize = 3;
+
+    imageUpload.addEventListener('change', handleImageUpload);
+    puzzleDiv.addEventListener('click', handlePieceClick);
+
+    function handleImageUpload(event) {
+      const file = event.target.files[0];
+      const reader = new FileReader();
+      reader.onload = function (event) {
+        const imageUrl = event.target.result;
+        createPuzzle(imageUrl);
+      };
+      reader.readAsDataURL(file);
+    }
+
+    function createPuzzle(imageUrl) {
+      const difficultySelect = document.getElementById('difficulty');
+      const difficulty = difficultySelect.value;
+
+      if (difficulty === 'easy') {
+        gridSize = 3;
+      } else if (difficulty === 'medium') {
+        gridSize = 5;
+      } else if (difficulty === 'hard') {
+        gridSize = 7;
+      }
+
+      createPuzzlePieces(imageUrl, gridSize);
+      shufflePuzzle();
+    }
+
+    function createPuzzlePieces(imageUrl, gridSize) {
+      puzzlePieces = [];
+      emptyPieceIndex = gridSize * gridSize - 1;
+      selectedPieceIndex = null;
+
+      puzzleDiv.innerHTML = '';
+
+      const containerWidth = puzzleDiv.offsetWidth;
+      const pieceWidth = containerWidth / gridSize;
+      const pieceHeight = pieceWidth;
+
+      puzzleDiv.style.gridTemplateColumns = `repeat(${gridSize}, 1fr)`;
+      puzzleDiv.style.gridTemplateRows = `repeat(${gridSize}, 1fr)`;
+
+      for (let i = 0; i < gridSize * gridSize; i++) {
+        const piece = document.createElement('div');
+        piece.classList.add('puzzle-piece');
+        piece.style.backgroundImage = `url(${imageUrl})`;
+        piece.style.backgroundSize = `${containerWidth}px ${containerWidth}px`;
+        piece.style.backgroundPosition = `${-(i % gridSize) * pieceWidth}px ${-Math.floor(i / gridSize) * pieceHeight}px`;
+        piece.style.order = i;
+        puzzlePieces.push(piece);
+        puzzleDiv.appendChild(piece);
+      }
+    }
+
+    function shufflePuzzle() {
+      puzzlePieces.sort(() => Math.random() - 0.5);
+
+      for (let i = 0; i < puzzlePieces.length; i++) {
+        puzzlePieces[i].style.order = i;
+      }
+    }
+
+    function handlePieceClick(event) {
+      const clickedPiece = event.target;
+      const clickedIndex = puzzlePieces.indexOf(clickedPiece);
+
+      if (selectedPieceIndex === null) {
+        selectedPieceIndex = clickedIndex;
+        clickedPiece.style.border = '2px solid blue';
+      } else {
+        if (selectedPieceIndex !== clickedIndex) {
+          swapPieces(selectedPieceIndex, clickedIndex);
+          checkPuzzle();
+        }
+        resetSelection();
+      }
+    }
+
+    function swapPieces(index1, index2) {
+    
+    if (index1 < 0 || index1 >= puzzlePieces.length || index2 < 0 || index2 >= puzzlePieces.length) {
+        console.error("Invalid indices for swapPieces:", index1, index2);
+        return;
+    }
+    
+    const piece1 = puzzlePieces[index1];
+    const piece2 = puzzlePieces[index2];
+    
+    
+    if (!piece1 || !piece2) {
+        console.error("Undefined pieces for indices:", index1, index2);
+        return;
+    }
+    
+    const tempOrder = piece1.style.order;
+    piece1.style.order = piece2.style.order;
+    piece2.style.order = tempOrder;
+}
+
+    function resetSelection() {
+      if (selectedPieceIndex !== null) {
+        puzzlePieces[selectedPieceIndex].style.border = '1px solid black';
+        selectedPieceIndex = null;
+      }
+    }
+    
+    
+
+function loadDefaultImage() {
+    const defaultImageUrl = './favicon.png'; 
+    createPuzzle(defaultImageUrl);
+}
+
+loadDefaultImage();  
+
+function handlePictionarySelection() {
+    const selectedImage = pictionarySelect.value;
+    if (selectedImage !== 'default') {
+        createPuzzle(selectedImage);
+    } else {
+        loadDefaultImage();
+    }
+}
+
+
+    function checkPuzzle() {
+      let solved = true;
+
+      for (let i = 0; i < puzzlePieces.length; i++) {
+        if (parseInt(puzzlePieces[i].style.order) !== i) {
+          solved = false;
+          break;
+        }
+      }
+
+      if (solved) {
+        puzzleDiv.classList.add('correct');
+      } else {
+        puzzleDiv.classList.remove('correct');
+      }
+    }
+    
+    const modal = document.getElementById('image-modal');
+const modalImg = document.getElementById('modal-image');
+const btn = document.getElementById("view-image-btn");
+const span = document.getElementsByClassName("close-modal")[0];
+
+btn.onclick = function() {
+  modal.style.display = "block";
+  const currentImage = puzzleDiv.querySelector('.puzzle-piece').style.backgroundImage.slice(5, -2);
+  modalImg.src = currentImage;
+}
+
+span.onclick = function() {
+  modal.style.display = "none";
+}
+
+window.onclick = function(event) {
+  if (event.target == modal) {
+    modal.style.display = "none";
+  }
+}
+document.getElementById('changelog-btn').addEventListener('click', function() {
+    Swal.fire({
+        title: 'Change Log',
+        html: `
+            <strong>Version 1.0</strong>
+                <p>- Added function to allow users to select images from their device.</p>
+            <strong>Version 1.1</strong>
+            
+                <p>- Squashed a few bugs.</p>
+                <p>- Introduced a pre-defined list of images for users to select from.<p>
+                <p>- Resolved issues with photo selection from users' devices.<p>
+               <p>- Change the difficulty of medium and hard mode to be more advanced</p>
+            
+            <strong>Version 1.2</strong>
+            <p>
+                <p>- Introduced function to display image modal upon button click.</p>
+                <p>- Transitioned to Swal.fire for alerts.</p>
+           <p>- Added Change Log</p>
+           <strong>Version 1.3</strong>
+           <p>- Fixed a few minor bugs.</p>
+           <p>- Fix index error on hard mode</p>
+            
+        `,
+        confirmButtonText: 'Okay',
+        customClass: {
+            content: 'alert-text'
+        }
+    });
+});
+
+Swal.fire({
+  title: 'Instructions',
+  html: `
+    <ol style="margin-top: 10px;">
+      <li>Select a difficulty level (Medium is recommended)</li>
+      <li>Select a pre-defined image or upload an image of your choice.</li>
+      <li>Challenge yourself to unscramble the image and reveal the complete picture.</li>
+      <li>If you get stuck there is a button at the bottom of the page that will display the complete image.</li>
+      <li>And of course, alert me if you encounter any bugs! 😁</li>
+    </ol>
+  `,
+  confirmButtonText: 'Begin?',
+  customClass: {
+    content: 'alert-text'
+  }
+});
+  </script>
+</html>
+
+
+<!-- 
+
+      ************************************************************
+
+           ++++++++++++++    --------    +++++++++++++++++
+
+{   By ~Aryan Maurya Mr.perfect https://amsrportfolio.netlify.app  }
+
+           ++++++++++++++    --------    +++++++++++++++++
+
+      ************************************************************
+ -->
